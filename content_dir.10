@@ -1,0 +1,20 @@
+#!/bin/bash
+
+echo " Volume in drive X has no label"
+echo " Directory of $(pwd)"
+echo
+
+for file in *
+do
+    if [ -f "$file" ]
+    then
+        size=$(wc -c < "$file")
+        date=$(date -r "$file" "+%d-%m-%Y %H:%M")
+        echo "$date    $size    $file"
+    elif [ -d "$file" ]
+    then
+        date=$(date -r "$file" "+%d-%m-%Y %H:%M")
+        echo "$date    <DIR>    $file"
+    fi
+done
+
