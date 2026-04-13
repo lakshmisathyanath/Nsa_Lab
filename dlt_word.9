@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ $# -ne 2 ]
+then
+    echo "syntax is <$0> <string> <filename>"
+    exit 1
+fi
+
+> temp
+
+while read -r line
+do
+    echo "$line" | grep -w "$1" > /dev/null
+
+    if [ $? -ne 0 ]
+    then
+        echo "$line" >> temp
+    fi
+done < "$2"
+
+mv temp "$2"
